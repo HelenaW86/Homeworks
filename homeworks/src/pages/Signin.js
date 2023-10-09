@@ -1,27 +1,28 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { signin } from "../store/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 
 function Signin() {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
-  
-  const submitHandler = () => {
-    axios
-      .post("http://localhost:8080/signup", {
-        username: username,
-        password: password,
-      })
-      .then((data) => {
-        console.log(data);
-        setUsername("");
-        setPassword("");
-      });
+  const user = useSelector((state) => state.auth.user);
+  const error = useSelector((state) => state.auth.error);
+  const dispatch = useDispatch();
+
+  const submitHandler = e => {
+    e.preventDefault()
+    dispatch(signin({username, password}))
+    .then(() => {
+      setUsername("");
+      setPassword("");
+    });
   };
 
   return (
     <div className="App">
       <form onSubmit={submitHandler}>
-        <h3>Sign up</h3>
+        <h3>Sign in</h3>
         <label htmlFor="username">Username</label>
         <input
           id="username"
@@ -37,9 +38,11 @@ function Signin() {
           onChange={(e) => setPassword(e.target.value)}
         />
         <div>
-        <button type="submit">Submit</button>
+          <button type="submit">Submit</button>
         </div>
-        </form>
+        {error ? <p>{error}</p> : null}
+        {user ? <Navigate to="/profile" replace={true} /> : null}
+      </form>
     </div>
   );
 }

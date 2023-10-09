@@ -1,8 +1,7 @@
-import { useLocation } from "react-router-dom"
+import { useSelector } from "react-redux/es/hooks/useSelector"
 
 const Profile = () => {
-  const location = useLocation();
-  const user = location.state
+const user = useSelector((state) => state.auth.user)
   return(
     <div>
       <h1>

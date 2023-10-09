@@ -3,10 +3,10 @@ import ReactDOM from "react-dom/client";
 import {
   createBrowserRouter,
   createRoutesFromElements,
-  Routes,
  RouterProvider,
   Route,
 } from "react-router-dom";
+import { Provider } from "react-redux";
 import "./index.css";
 import App from "./App";
 import Signin from "./pages/Signin";
@@ -14,6 +14,7 @@ import RootLayout from "./RootLayout";
 import Signup from "./pages/Signup";
 import Error from "./pages/Error";
 import Profile from "./pages/Profile";
+import { store } from "./store/store";
 
 
 const router = createBrowserRouter(
@@ -31,6 +32,8 @@ const router = createBrowserRouter(
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
+    <Provider store={store}>
     <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 );
