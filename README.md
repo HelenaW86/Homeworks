@@ -1,2 +1,3 @@
 # Homeworks
-mySQL and gRPC practicing
+mySQL, Crud, Express,
+React, Node, Redux, Sass
