@@ -28,7 +28,7 @@ function Signin() {
           className="input"
           id="username"
           type="text"
-          value={username}
+          value={username ?? ""}
           onChange={(e) => setUsername(e.target.value)}
         />
                 </label>
@@ -38,7 +38,7 @@ function Signin() {
           className="input"
           id="password"
           type="text"
-          value={password}
+          value={password ?? ""}
           onChange={(e) => setPassword(e.target.value)}
         />
             </label>

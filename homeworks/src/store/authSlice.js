@@ -38,14 +38,14 @@ export const signin = createAsyncThunk(
 // })
 // .catch(err => setError('Couldn`t fetch questions'))
 
-export const getQuestions = createAsyncThunk(
-  "auth/getQuestions",
-  async ({ theme }, thunkApi) => {
+
+export const themeQuestions = createAsyncThunk(
+  "auth/themeQuestions",
+  async (theme , thunkApi) => {
     try {
-      const res = await axios.get("http://localhost:8080/getQuestions", {
-        theme,
-      })
-      console.log(res)
+      const res = await axios.get(`http://localhost:8080/themeQuestions/${theme}`, 
+        {theme}
+      );
       return res.data;
     } catch (err) {
       return thunkApi.rejectWithValue(err.response.data);
@@ -104,15 +104,15 @@ export const authSlice = createSlice({
         state.isLoggedIn = false;
         state.error = action.payload;
       })
-      .addCase(getQuestions.fulfilled, (state, action) => {
-        state.questions = action.payload;
+      .addCase(themeQuestions.fulfilled, (state, action) => {
         state.loading = false;
+        state.questions = action.payload;
         state.error = null;
       })
-      .addCase(getQuestions.pending, (state, action) => {
+      .addCase(themeQuestions.pending, (state, action) => {
         state.loading = true;
       })
-      .addCase(getQuestions.rejected, (state, action) => {
+      .addCase(themeQuestions.rejected, (state, action) => {
         state.loading = false;
         state.questions = null;
         state.error = action.payload;

@@ -59,14 +59,15 @@ res.status(418).send('Username doesn`t match')
 })
 })
 
-app.get('/getQuestions', (req, res) => {
-  const theme = req.query.theme;
+app.get('/themeQuestions/:theme', (req, res) => {
+  const theme = req.params.theme;
+  console.log(req.params.theme)
   db.query("SELECT * FROM questionsubject WHERE questionsubject.theme = ?", [theme], (err, result) => {
     if(err) {
       res.status(418).send('An error occourd')
     }
     if(res){
-      res.send(result)
+      res.json(result);
     }
   })
 })
