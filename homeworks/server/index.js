@@ -8,12 +8,11 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 app.use(cors());
-console.log(`${process.env.VAR}`)
 const db = mysql.createPool({
   connectionLimit: 10,
   host: 'localhost',
   user: 'root',
-  password: `${process.env.VAR}`,
+  password:`${process.env.VAR}`,
   database: 'glosor'
 })
 
@@ -27,7 +26,7 @@ bcrypt.hash(password, saltRounds, (err, hashedPassword) => {
   if(err) {
     res.status(418).send('Couldn´t hash password...')
   }else{
-    db.query("INSERT INTO glosor.users (username, password) VALUES (?, ?)", [username, hashedPassword], (err, result) => {
+    db.query("INSERT INTO users (username, password) VALUES (?, ?)", [username, hashedPassword], (err, result) => {
       if(err) {
        res.status(418).send('Couldn´t register user...')
       }
@@ -43,7 +42,7 @@ app.post('/signin', (req, res) => {
 const username = req.body.username;
 const password = req.body.password;
 
-db.query("SELECT * FROM glosor.users WHERE username = ?", [username], (err, result) => {
+db.query("SELECT * FROM users WHERE username = ?", [username], (err, result) => {
   if(err) {
     res.status(418).send(err.message)
   }else if(result.length < 1){
@@ -58,8 +57,20 @@ res.status(418).send('Username doesn`t match')
     })
   }
 })
-
 })
+
+app.get('/getQuestions', (req, res) => {
+  const theme = req.query.theme;
+  db.query("SELECT * FROM questionsubject WHERE questionsubject.theme = ?", [theme], (err, result) => {
+    if(err) {
+      res.status(418).send('An error occourd')
+    }
+    if(res){
+      res.send(result)
+    }
+  })
+})
+
 app.listen(8080, () => {
   console.log('server listen')
 })

@@ -1,0 +1,27 @@
+nav.navbar {
+  width: 100%;
+  background: rgb(43, 43, 53);
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  padding: 14px;
+  z-index: 2;
+  color: $primary;
+  a {text-decoration: none}
+    a:visited {
+      color: $primary;
+      }
+    a:active{
+      color: $secondary;
+    }
+
+  .navbar-links {
+    display: flex;
+    flex-direction: row;
+    width: 300px;
+    list-style-type: none;
+    li{
+      margin: 10px;
+    }
+  }
+}

@@ -1,18 +1,21 @@
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "./store/authSlice";
+import { logout } from "../store/authSlice";
 
 const Navigation = () => {
   const loggedIn = useSelector((state) => state.auth.isLoggedIn);
   const dispatch = useDispatch();
   return (
-    <nav>
-      <Link to="/">Questions</Link>
+    <nav className={"navbar"}>
+      <Link  to="/">Questions</Link>
       {loggedIn ? (
-        <ul>
+        <ul className="navbar-links">
           <li>
             <Link to="/profile">Profile</Link>
-          </li>{" "}
+          </li>
+          <li>
+            <Link to="/questions">Questions</Link>
+          </li>
           <li>
             <Link to="/" onClick={() => dispatch(logout())}>
            Log out
@@ -20,7 +23,7 @@ const Navigation = () => {
           </li>
         </ul>
       ) : (
-        <ul>
+        <ul className="navbar-links">
           <li>
             <Link to="/signup">Sign up</Link>
           </li>

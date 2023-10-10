@@ -21,24 +21,30 @@ const  Signup = () =>  {
 
   return (
     <div>
-      <form onSubmit={submitHandler}>
-        <h3>Sign up</h3>
-        <label htmlFor="username">Username</label>
+      <form className="form" onSubmit={submitHandler}>
+        <h3>Registrera dig</h3>
+        <label className="label" htmlFor="username">
+          Namn
         <input
+          className="input"
           id="username"
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
-        <label htmlFor="password">Password</label>
+        </label>
+        <label className="label" htmlFor="password">
+          Lösenord
         <input
+          className="input"
           id="password"
           type="text"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        </label>
         <div>
-        <button type="submit">Submit</button>
+        <button className="submit-btn" type="submit">Skicka</button>
         </div>
         {error ? <p>{error}</p> : null}
         {user ? <Navigate to="/profile" replace={true} /> : null}

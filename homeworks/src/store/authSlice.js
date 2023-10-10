@@ -32,8 +32,31 @@ export const signin = createAsyncThunk(
   }
 );
 
+// axios.get('http://localhost:8080/questions', {params: {theme}})
+// .then(res => {
+//   setQuestions(res.data)
+// })
+// .catch(err => setError('Couldn`t fetch questions'))
+
+export const getQuestions = createAsyncThunk(
+  "auth/getQuestions",
+  async ({ theme }, thunkApi) => {
+    try {
+      const res = await axios.get("http://localhost:8080/getQuestions", {
+        theme,
+      })
+      console.log(res)
+      return res.data;
+    } catch (err) {
+      return thunkApi.rejectWithValue(err.response.data);
+    }
+  }
+);
+
+
 const initialState = {
   user: "",
+  questions: null,
   isLoggedIn: false,
   loading: false,
   error: null,
@@ -45,6 +68,7 @@ export const authSlice = createSlice({
   reducers: {
     logout: (state, action) => {
       state.user = "";
+      state.questions = null;
       state.isLoggedIn = false;
       state.loading = false;
       state.error = null;
@@ -78,6 +102,19 @@ export const authSlice = createSlice({
       .addCase(signin.rejected, (state, action) => {
         state.loading = false;
         state.isLoggedIn = false;
+        state.error = action.payload;
+      })
+      .addCase(getQuestions.fulfilled, (state, action) => {
+        state.questions = action.payload;
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(getQuestions.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(getQuestions.rejected, (state, action) => {
+        state.loading = false;
+        state.questions = null;
         state.error = action.payload;
       });
   },

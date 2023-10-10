@@ -1,0 +1,13 @@
+label.label{
+  display: flex;
+  flex-direction: column;
+}
+input.input{
+  margin-bottom: 10px;
+  border-radius: 5px;
+  padding: 5px; 
+  border: 1px solid $primary;
+  &:focus{
+   outline: 1.5px solid $primary;
+  }
+}

@@ -1,0 +1,45 @@
+button.submit-btn{
+  background: $white;
+  color: $primary;
+  border: 2px solid $primary;
+  border-radius: 7px;
+  padding: 5px 10px;
+  margin: 40px auto auto 70%;
+  cursor: pointer;
+  font-size: 20px;
+  &:hover{
+    background: $primary;
+    color: $white;
+    border: 2px solid $white;
+  }
+}
+button.theme-btn{
+  width: 120px;
+  background: $white;
+  color: $primary;
+  border: none;
+  border-radius: 7px;
+  padding: 5px 10px;
+  margin: 7px 7px; 
+  cursor: pointer;
+  font-size: 20px;
+  &:hover{
+    background: $primary;
+    color: $white;
+  }
+}
+button.questions-list-btn{
+  width: 95%;
+  height: 80px;
+  font-size: 30px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  background: $white;
+  color: $primary;
+  &:hover{
+    background: $primary;
+    color: $white;
+  }
+}
