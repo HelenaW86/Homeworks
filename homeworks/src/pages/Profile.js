@@ -7,7 +7,7 @@ const Profile = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
-  const result = useSelector((state) => state.auth.results);
+  const result = useSelector((state) => state.auth.results)?.filter((r) => r.user === user);
   useEffect(() => {
     dispatch(getResults(user));
   }, [user]);

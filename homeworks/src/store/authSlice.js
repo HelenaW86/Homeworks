@@ -130,7 +130,19 @@ export const deleteResults = createAsyncThunk(
   }
 );
 
-
+export const putResult = createAsyncThunk(
+  "auth/putResult",
+  async (result , thunkApi) => {
+    try {
+      const res = await axios.put(`http://localhost:8080/putResult`, 
+        {result}
+      );
+      return res.data;
+    } catch (err) {
+      return thunkApi.rejectWithValue(err.response.data);
+    }
+  }
+);
 
 
 const initialState = {
@@ -237,6 +249,19 @@ export const authSlice = createSlice({
         state.loading = true;
       })
       .addCase(deleteResults.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(putResult.fulfilled, (state, action) => {
+        state.loading = false;
+        const index = state.results?.findIndex((r) => r.resultId === action.payload);
+        state.results[index] = action.payload
+        state.error = null;
+      })
+      .addCase(putResult.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(putResult.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });

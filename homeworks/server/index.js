@@ -112,6 +112,24 @@ app.post('/postResult', (req, res) => {
     }
 );
 
+app.put('/putResult', (req, res) => {
+  const user = req.body.result.user;
+  const theme = req.body.result.theme;
+  const max = req.body.result.max;
+  const card = req.body.result.card;
+  const result = req.body.result.result;
+      db.query("UPDATE savedresults SET result = ? WHERE card = ? ", [result, card], (err, results) => {
+        if(err) {
+         res.status(418).send('Couldn´t post result...')
+         console.log(req.body)
+        }
+        else {
+          res.send({result: result, card: card, user: user, theme: theme, max: max})
+        }
+      })
+    }
+);
+
 app.get('/results/:user', (req, res) => {
   const user = req.params.user;
   db.query("SELECT * FROM savedresults WHERE savedresults.user = ?", [user], (err, result) => {

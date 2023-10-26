@@ -1,18 +1,22 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { cardQuestions, postResult } from "../store/authSlice";
+import { cardQuestions, postResult, putResult } from "../store/authSlice";
 
 export const PracticeOn = () => {
   const dispatch = useDispatch();
   const questions = useSelector((state) => state?.auth?.questions);
   const user = useSelector((state) => state?.auth?.user);
   const error = useSelector((state) => state.auth.error);
+  const result = useSelector((state) => state.auth.results)?.filter(
+    (r) => r.user === user
+  );
   const { theme, name } = useParams();
   const [questionIndex, setQuestionIndex] = useState(0);
   const [options, setOptions] = useState([]);
   const [check, setCheck] = useState(false);
   const [rightAnswers, setRightAnswers] = useState(0);
+  console.log(result);
   useEffect(() => {
     dispatch(cardQuestions({ theme, name }));
   }, [name]);
@@ -42,16 +46,24 @@ export const PracticeOn = () => {
   const reset = () => {
     setCheck(false);
     setQuestionIndex(0);
-    setRightAnswers(0)
+    setRightAnswers(0);
   };
 
   const save = () => {
-    const card = name;
-    const result =  rightAnswers;
+    
+    if (result?.some((i) => i.card.includes(name))) {
+      const card = name;
+    const result = rightAnswers;
     const max = questions.length;
-
-    dispatch(postResult({  user, theme, card, result, max }));
-  }
+      dispatch(putResult({ user, theme, card, result, max }));
+      
+    } else {
+      const card = name;
+      const result = rightAnswers;
+      const max = questions.length;
+      dispatch(postResult({ user, theme, card, result, max }));
+    }
+  };
   return (
     <>
       ✨🎉👑
