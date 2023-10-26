@@ -6,3 +6,24 @@ form.form{
   background: $white;
   border-radius: 7px;
 }
+form.create-form{
+  background: $white;
+  width: 300px;
+  padding: 20px; 
+  margin: auto;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  color: $primary;
+  
+}
+div.create-type-options{
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  margin: 15px 0 ;
+}
+span.radio-label{
+  display: inline-block;
+  margin-right: 10px;
+}

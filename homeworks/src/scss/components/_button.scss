@@ -1,10 +1,10 @@
 button.submit-btn{
   background: $white;
   color: $primary;
+  margin-top: 10px;
   border: 2px solid $primary;
   border-radius: 7px;
   padding: 5px 10px;
-  margin: 40px auto auto 70%;
   cursor: pointer;
   font-size: 20px;
   &:hover{
@@ -32,7 +32,7 @@ button.questions-list-btn{
   width: 95%;
   height: 80px;
   font-size: 30px;
-  margin-top: 10px;
+  margin: 40px auto 0;
   border: none;
   border-radius: 7px;
   cursor: pointer;
@@ -41,5 +41,19 @@ button.questions-list-btn{
   &:hover{
     background: $primary;
     color: $white;
+  }
+}
+button.add-question-btn{
+  margin-top: 40px;
+  width: 100px;
+  background: $grey;
+  border: 2px solid $white;
+  color: $white;
+  padding: 10px;
+  border-radius: 7px;
+  &:hover{
+    border: 2px solid $primary;
+    color: $primary;
+    cursor: pointer;
   }
 }

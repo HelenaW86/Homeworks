@@ -1,0 +1,48 @@
+div.question-card{
+  margin: auto;
+  width: 300px;
+  height: 200px;
+  text-align: center;
+  background: $white;
+  border-radius: 7px;
+
+  p.question-text{
+ font-size: 45px;
+ font-weight: bold;
+ padding-top: 50px;
+ letter-spacing: 5px;
+ color: $secondary
+  }
+}
+
+div.options{
+  width: 310px;
+  display: grid; 
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  margin: 30px auto;
+  .option{
+    margin: 5px;
+    background: $white;
+    height: 60px;
+    border-radius: 8px;
+    text-align: center;
+    align-items: center;
+    &:hover{
+      cursor: pointer;
+      margin: -1px;
+      border: 3px solid $primary;
+    }
+
+    .option-text{
+      color: $primary;
+      margin-top: 15px;
+      font-weight: 700;
+      font-size: 25px;
+    }
+  }
+}
+div.container{
+  width: 270px;
+  margin: auto;
+}

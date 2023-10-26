@@ -32,13 +32,6 @@ export const signin = createAsyncThunk(
   }
 );
 
-// axios.get('http://localhost:8080/questions', {params: {theme}})
-// .then(res => {
-//   setQuestions(res.data)
-// })
-// .catch(err => setError('Couldn`t fetch questions'))
-
-
 export const themeQuestions = createAsyncThunk(
   "auth/themeQuestions",
   async (theme , thunkApi) => {
@@ -53,10 +46,98 @@ export const themeQuestions = createAsyncThunk(
   }
 );
 
+export const cardQuestions = createAsyncThunk(
+  "auth/questions",
+  async (questions , thunkApi) => {
+    try {
+      const res = await axios.get(`http://localhost:8080/questions/${questions.name}`, 
+        {questions}
+      );
+      return res.data;
+    } catch (err) {
+      return thunkApi.rejectWithValue(err.response.data);
+    }
+  }
+);
+
+export const postQuestionCard = createAsyncThunk(
+  "auth/postQuestionCard",
+  async (card , thunkApi) => {
+    try {
+      const res = await axios.post(`http://localhost:8080/postQuestionCard`, 
+        {card}
+      );
+      return res.data;
+    } catch (err) {
+      return thunkApi.rejectWithValue(err.response.data);
+    }
+  }
+);
+
+export const postQuestion = createAsyncThunk(
+  "auth/postQuestion",
+  async (question , thunkApi) => {
+    try {
+      const res = await axios.post(`http://localhost:8080/postQuestion`, 
+        {question}
+      );
+      return res.data;
+    } catch (err) {
+      return thunkApi.rejectWithValue(err.response.data);
+    }
+  }
+);
+
+export const postResult = createAsyncThunk(
+  "auth/postResult",
+  async (result , thunkApi) => {
+    try {
+      const res = await axios.post(`http://localhost:8080/postResult`, 
+        {result}
+      );
+      return res.data;
+    } catch (err) {
+      return thunkApi.rejectWithValue(err.response.data);
+    }
+  }
+);
+
+export const getResults = createAsyncThunk(
+  "auth/results",
+  async (user , thunkApi) => {
+    try {
+      const res = await axios.get(`http://localhost:8080/results/${user}`, 
+        {user}
+      );
+      return res.data;
+    } catch (err) {
+      return thunkApi.rejectWithValue(err.response.data);
+    }
+  }
+);
+
+export const deleteResults = createAsyncThunk(
+  "auth/deleteResults",
+  async (id , thunkApi) => {
+    try {
+      const res = await axios.delete(`http://localhost:8080/deleteResults/${id}`, 
+        {id}
+      );
+      return res.data;
+    } catch (err) {
+      return thunkApi.rejectWithValue(err.response.data);
+    }
+  }
+);
+
+
+
 
 const initialState = {
   user: "",
+  themeQuestions: null,
   questions: null,
+  results: null,
   isLoggedIn: false,
   loading: false,
   error: null,
@@ -105,8 +186,9 @@ export const authSlice = createSlice({
         state.error = action.payload;
       })
       .addCase(themeQuestions.fulfilled, (state, action) => {
+        state.isLoggedIn = true;
         state.loading = false;
-        state.questions = action.payload;
+        state.themeQuestions = action.payload;
         state.error = null;
       })
       .addCase(themeQuestions.pending, (state, action) => {
@@ -114,7 +196,48 @@ export const authSlice = createSlice({
       })
       .addCase(themeQuestions.rejected, (state, action) => {
         state.loading = false;
+        state.themeQuestions = null;
+        state.error = action.payload;
+      })
+      .addCase(cardQuestions.fulfilled, (state, action) => {
+        state.isLoggedIn = true;
+        state.loading = false;
+        state.questions = action.payload;
+        state.error = null;
+      })
+      .addCase(cardQuestions.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(cardQuestions.rejected, (state, action) => {
+        state.loading = false;
         state.questions = null;
+        state.error = action.payload;
+      })
+      .addCase(getResults.fulfilled, (state, action) => {
+        state.isLoggedIn = true;
+        state.loading = false;
+        state.results = action.payload;
+        state.error = null;
+      })
+      .addCase(getResults.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(getResults.rejected, (state, action) => {
+        state.loading = false;
+        state.results = null;
+        state.error = action.payload;
+      })
+      .addCase(deleteResults.fulfilled, (state, action) => {
+        state.loading = false;
+        const index = state.results?.findIndex((r) => r.resultId === action.payload);
+        state.results.splice(index, 1);
+        state.error = null;
+      })
+      .addCase(deleteResults.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(deleteResults.rejected, (state, action) => {
+        state.loading = false;
         state.error = action.payload;
       });
   },
