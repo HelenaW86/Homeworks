@@ -161,7 +161,7 @@ export const authSlice = createSlice({
   reducers: {
     logout: (state, action) => {
       state.user = "";
-      state.questions = null;
+      state.questions = [];
       state.isLoggedIn = false;
       state.loading = false;
       state.error = null;
@@ -241,9 +241,9 @@ export const authSlice = createSlice({
       })
       .addCase(deleteResults.fulfilled, (state, action) => {
         state.loading = false;
-        const index = state.results?.findIndex((r) => r.resultId === action.payload);
-        state.results.splice(index, 1);
         state.error = null;
+        const index = state.results?.findIndex((r) => r.resultId == action.payload.resultId);
+          state.results.splice(index, 1);
       })
       .addCase(deleteResults.pending, (state, action) => {
         state.loading = true;
@@ -254,7 +254,7 @@ export const authSlice = createSlice({
       })
       .addCase(putResult.fulfilled, (state, action) => {
         state.loading = false;
-        const index = state.results?.findIndex((r) => r.resultId === action.payload);
+        const index = state.results?.findIndex((r) => r.card === action.payload.card);
         state.results[index] = action.payload
         state.error = null;
       })

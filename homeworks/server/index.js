@@ -103,7 +103,6 @@ app.post('/postResult', (req, res) => {
       db.query("INSERT INTO savedresults (user, theme, card, result, max) VALUES (?, ?, ?, ?, ?)", [user, theme, card, result, max], (err, results) => {
         if(err) {
          res.status(418).send('Couldn´t post result...')
-         console.log(req.body)
         }
         else {
           res.send({user: user, theme: theme, card: card, result: result, max: max})
@@ -117,14 +116,15 @@ app.put('/putResult', (req, res) => {
   const theme = req.body.result.theme;
   const max = req.body.result.max;
   const card = req.body.result.card;
-  const result = req.body.result.result;
+  const result = req.body.result.results;
+  const resultId = req.body.result.resultId;
       db.query("UPDATE savedresults SET result = ? WHERE card = ? ", [result, card], (err, results) => {
         if(err) {
          res.status(418).send('Couldn´t post result...')
          console.log(req.body)
         }
         else {
-          res.send({result: result, card: card, user: user, theme: theme, max: max})
+          res.send({result: result, card: card, user: user, theme: theme, max: max, resultId: resultId})
         }
       })
     }
@@ -135,9 +135,9 @@ app.get('/results/:user', (req, res) => {
   db.query("SELECT * FROM savedresults WHERE savedresults.user = ?", [user], (err, result) => {
     if(err) {
       res.status(418).send('An error occourd')
+      console.log(req.body)
     }
     if(res){
-
       res.json(result);
     }
   })

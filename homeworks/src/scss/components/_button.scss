@@ -57,3 +57,19 @@ button.add-question-btn{
     cursor: pointer;
   }
 }
+button.game-btn{
+  background: $white;
+  color: $primary;
+  margin-top: 10px;
+  border: 2px solid $primary;
+  border-radius: 7px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 20px;
+  margin-right: 20px;
+  &:hover{
+    background: $primary;
+    color: $white;
+    border: 2px solid $white;
+  }
+}

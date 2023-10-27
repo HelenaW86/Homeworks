@@ -36,6 +36,7 @@ export const CreateForm = ({setCreate}) => {
         name: cardName,
       })
     );
+    setCreate(false)
   };
   const sendQuestion = (e) => {
     e.preventDefault();

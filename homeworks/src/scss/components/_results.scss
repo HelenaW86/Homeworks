@@ -1,10 +1,43 @@
 .result-card{
-  width: 300px;
-  height: 100px;
+  padding: 5px;
+  width: 400px;
+  min-height: 100px;
   font-size: 30px;
   margin: 40px auto 0;
   border: none;
   border-radius: 7px;
   background: $white;
   color: $primary;
+  div{
+    display: flex;
+    justify-content: space-between;
+  }
+  .result-practice-btn{
+    margin: 5px;
+    height: 30px;
+    width: 80px;
+    border: none;
+    border-radius: 7px;
+    background: $primary;
+  color: $white;
+  cursor: pointer;
+  &:hover{
+    font-weight: 800;
+    background-color: $secondary;
+  }
+  }
+  .result-delete-btn{
+    margin: 5px;
+    height: 30px;
+    width: 80px;
+    border: none;
+    border-radius: 7px;
+    background: $black;
+  color: $white;
+  cursor: pointer;
+  &:hover{
+    font-weight: 800;
+    background-color: $secondary;
+  }
+  }
 }

@@ -1,30 +1,49 @@
+.questions{
+position: relative;
+ width: 700px;
+  margin: auto;
+
+.next-question-btn{
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  color: $white;
+  left: auto;
+  top: 80px;
+  bottom: auto;
+  cursor: pointer;
+}
+}
 div.question-card{
   margin: auto;
-  width: 300px;
-  height: 200px;
+  width: 400px;
   text-align: center;
   background: $white;
   border-radius: 7px;
-
-  p.question-text{
- font-size: 45px;
+  min-height: 160px;
+.question-counter{
+  text-align: right;
+  padding: 5px;
+}
+.question-text{
+ font-size: 30px;
  font-weight: bold;
- padding-top: 50px;
+ padding-top: 20px;
  letter-spacing: 5px;
  color: $secondary
   }
 }
 
 div.options{
-  width: 310px;
+  width: 400px;
   display: grid; 
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr 1fr;
-  margin: 30px auto;
+  margin: 30px auto 0;
   .option{
     margin: 5px;
     background: $white;
-    height: 60px;
+    min-height: 60px;
     border-radius: 8px;
     text-align: center;
     align-items: center;
@@ -40,9 +59,18 @@ div.options{
       font-weight: 700;
       font-size: 25px;
     }
+    .check-icon{
+        position: absolute;
+        right: 0;
+        bottom: 5px;
+        font-size: 20px;
+    }
   }
 }
 div.container{
   width: 270px;
   margin: auto;
+}
+.game-btn-container{
+  padding-left: 150px;
 }
