@@ -6,10 +6,10 @@ import { Navigate } from "react-router-dom";
 function Signin() {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
-  const user = useSelector((state) => state.auth.user);
-  const error = useSelector((state) => state.auth.error);
+  const user = useSelector((state) => state?.user);
+  const error = useSelector((state) => state?.error);
   const dispatch = useDispatch();
-
+console.log(user)
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(signin({ username, password })).then(() => {
@@ -17,7 +17,7 @@ function Signin() {
       setPassword("");
     });
   };
-
+console.log(user)
   return (
     <div className="App">
       <form className="form" onSubmit={submitHandler}>

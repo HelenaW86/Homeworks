@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../store/authSlice";
 
 const Navigation = () => {
-  const loggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const loggedIn = useSelector((state) => state?.isLoggedIn);
   const dispatch = useDispatch();
   return (
     <nav className={"navbar"}>

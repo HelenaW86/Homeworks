@@ -11,7 +11,7 @@ export const CreateForm = ({setCreate}) => {
   const [wrong1, setWrong1] = useState();
   const [wrong2, setWrong2] = useState();
   const [wrong3, setWrong3] = useState();
-  const user = useSelector((state) => state.auth.user);
+  const user = useSelector((state) => state?.user);
 
   const sendQuestionCard = (e) => {
     e.preventDefault();

@@ -6,8 +6,8 @@ import { useNavigate } from "react-router-dom";
 const Profile = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth.user);
-  const result = useSelector((state) => state.auth.results)
+  const user = useSelector((state) => state?.user);
+  const result = useSelector((state) => state?.results)
 
   useEffect(() => {
     if(user){

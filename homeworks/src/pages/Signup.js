@@ -6,8 +6,8 @@ import { Navigate } from "react-router-dom";
 const  Signup = () =>  {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const user = useSelector((state) => state.auth.user)
-  const error = useSelector((state) => state.auth.error)
+  const user = useSelector((state) => state?.user)
+  const error = useSelector((state) => state?.error)
   const dispatch = useDispatch();
   
   const submitHandler = e => {

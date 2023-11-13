@@ -6,16 +6,17 @@ import { cardQuestions, postResult, putResult } from "../store/authSlice";
 export const PracticeOn = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const questions = useSelector((state) => state?.auth?.questions);
-  const user = useSelector((state) => state?.auth?.user);
-  const error = useSelector((state) => state.auth.error);
-  const result = useSelector((state) => state.auth.results)
+  const questions = useSelector((state) => state?.questions);
+  const user = useSelector((state) => state?.user);
+  const error = useSelector((state) => state?.error);
+  const result = useSelector((state) => state?.results)
   const { theme, name } = useParams();
   const [questionIndex, setQuestionIndex] = useState(0);
   const [options, setOptions] = useState([]);
   const [check, setCheck] = useState(null);
   const [rightAnswers, setRightAnswers] = useState(0);
 
+  console.log(questions)
   useEffect(() => {
     dispatch(cardQuestions({ theme, name }));
   }, [name]);

@@ -14,9 +14,9 @@ export const Questions = () => {
     }
   }, [theme]);
 
-  const questions = useSelector((state) => state.auth.themeQuestions);
+  const questions = useSelector((state) => state?.themeQuestions);
 
-  const error = useSelector((state) => state.auth.error);
+  const error = useSelector((state) => state?.error);
   const navigate = useNavigate();
   const themes = ["Matte", "Svenska", "Engelska", "Geografi"];
   return (

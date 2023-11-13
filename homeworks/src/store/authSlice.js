@@ -216,6 +216,7 @@ export const authSlice = createSlice({
         state.loading = false;
         state.questions = action.payload;
         state.error = null;
+        console.log( state.questions)
       })
       .addCase(cardQuestions.pending, (state, action) => {
         state.loading = true;
@@ -242,7 +243,7 @@ export const authSlice = createSlice({
       .addCase(deleteResults.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        const index = state.results?.findIndex((r) => r.resultId == action.payload.resultId);
+        const index = state.results?.findIndex((r) => r.resultId === action.payload.resultId);
           state.results.splice(index, 1);
       })
       .addCase(deleteResults.pending, (state, action) => {
